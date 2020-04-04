@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dylan Community</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/community.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body>
+<div th:insert="~{navigation::nav}"></div>
+
+
+        <div class="jumbotron">
+            <h1>出错拉!</h1>
+            <p th:text="${message}">页面消失了。稍后再来瞅瞅吧。</p>
+            <p><a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a></p>
+        </div>
+
+
+
+</div>
+</body>
+</html>

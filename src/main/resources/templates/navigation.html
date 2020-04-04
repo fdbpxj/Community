@@ -20,7 +20,7 @@
                     <span class="sr-only">Dylan Community</span>
 
                 </button>
-                <a class="navbar-brand" href="/index">Dylan Community</a>
+                <a class="navbar-brand" href="/">Dylan Community</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -37,7 +37,7 @@
                         <a href="/publish">提问</a>
                     </li>
                     <li th:if="${session.user==null}">
-                        <a href="https://github.com/login/oauth/authorize?client_id=2a5e20191d2396effccc&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>
+                        <a href="https://github.com/login/oauth/authorize?client_id=2a5e20191d2396effccc&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
                     </li>
 
                     <li class="dropdown" th:if="${session.user!=null}">

@@ -1,7 +1,12 @@
 package life.majian.community.test;
 
-public interface Child  {
-    int i=3;
-
-    void Do();
+public class Child implements Father {
+    private String name;
+    Child(String name){
+        this.name=name;
+    }
+    @Override
+    public void print() {
+        System.out.println(name);
+    }
 }

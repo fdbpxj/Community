@@ -1,7 +1,7 @@
 package life.majian.community.controller;
 
 import life.majian.community.dto.AccessTokenDTO;
-import life.majian.community.mapper.UserMapper;
+
 import life.majian.community.model.User;
 import life.majian.community.provider.GithubProvider;
 import life.majian.community.dto.GithubUser;
