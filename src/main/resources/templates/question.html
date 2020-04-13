@@ -5,11 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/community.css"/>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet"href="/css/editormd.preview.css" />
+    <script src="/js/jquery-3.3.1.min.js" type="application/javascript"></script>
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <script src="/js/community.js" type="application/javascript"></script>
     <script src="/js/moment.js" type="application/javascript"></script>
+    <script src="/js/editormd.js" type="application/javascript"></script>
+    <script src="/js/lib/marked.min.js" type="application/javascript"></script>
+    <script src="/js/lib/prettify.min.js" type="application/javascript"></script>
 
 </head>
 <body>
@@ -29,7 +33,14 @@
             </span>
                 <hr>
 <!--                内容-->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view">
+                    <textarea style="display:none;" th:text="${question.description}"></textarea>
+                </div>
+                <script type="text/javascript">
+                    $(function() {
+                        editormd.markdownToHTML("question-view", {});
+                    });
+                </script>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <!--                    标签-->
@@ -48,6 +59,7 @@
 
                     </a>
                 </div>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
             </div>
 
@@ -109,12 +121,13 @@
                     <div class="media">
                         <div class="media-left">
                             <a href="#">
-                                <img class="media-object rounded" th:src="${question.user.avatarUrl}" alt="...">
+                                <img class="media-object rounded" th:src="${session.user!=null?session.user.avatarUrl : '/images/defaultUser.png'}" alt="...">
                             </a>
+
                         </div>
                         <div class="media-body">
                             <h6 class="media-heading">
-                                <span th:text="${question.user.name}"></span>
+                                <span th:text="${session.user!=null?session.user.name:'无名氏'}"></span>
                             </h6>
 
 
@@ -154,7 +167,7 @@
             <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>社区创始人</h4>
-                <img  src="/img/0.jpg" class="img-thumbnail question-wechat"/>
+                <img src="/images/0.jpg" class="img-thumbnail question-wechat"/>
             </div>
 
 
@@ -176,5 +189,7 @@
 
     </div>
 </div>
+<div th:insert="~{footer::foot}"></div>
+
 </body>
 </html>

@@ -2,6 +2,7 @@ package life.majian.community.service;
 
 import life.majian.community.dto.PaginationDTO;
 import life.majian.community.dto.QuestionDTO;
+import life.majian.community.dto.QuestionQueryDTO;
 import life.majian.community.exception.CustomizeErrorCode;
 import life.majian.community.exception.CustomizeException;
 import life.majian.community.mapper.QuestionExtMapper;
@@ -30,9 +31,18 @@ public class QuestionService {
     @Autowired
     private QuestionExtMapper questionExtMapper;
 
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(String search,Integer page, Integer size) {
+        if (StringUtils.isNotBlank(search)){
+            String[] tag=StringUtils.split(search," ");
+            search=Arrays.stream(tag).collect(Collectors.joining("|"));
+
+        }
+
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
+
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
         paginationDTO.setPagination(totalCount, page, size);
         if (page < 1) {
             page = 1;
@@ -48,7 +58,10 @@ public class QuestionService {
         Integer offset = size * (page - 1);//offset代表去数据库拿offset到后面5条的数据
         QuestionExample questionExample=new QuestionExample();
         questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample, new RowBounds(offset, size));
+        questionQueryDTO.setSize(size);
+        questionQueryDTO.setPage(offset);
+//        List<Question> questions = questionMapper.selectByExampleWithBLOBsWithRowbounds(questionExample, new RowBounds(offset, size));
+        List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
 
         List<QuestionDTO> questionDTOList = new ArrayList<>();//拿到每5个的 数据集合 包括user
 
@@ -68,7 +81,7 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
         }
 
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
 
         return paginationDTO;
     }
@@ -106,7 +119,7 @@ public class QuestionService {
             }
         }
 
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
 
         return paginationDTO;
     }

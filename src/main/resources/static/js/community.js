@@ -108,15 +108,18 @@ function collapseComments(e) {
     }
 }
 
+function showSelectTag() {
+    $("#select-tag").show();
+}
 
-
-function selectTag(value) {
-    var tagContent=$("#tag").val();
-    if(value!=null&&tagContent.indexOf(value)==-1) {
-        if (tagContent) {
-            $("#tag").val(tagContent + "," + value);
+function selectTag(e) {
+    var tagContent=e.getAttribute("data-tag");
+    var previous=$("#tag").val();
+    if(tagContent!=null&&previous.indexOf(tagContent)==-1) {
+        if (previous) {
+            $("#tag").val(previous + "," + tagContent);
         } else {
-            $("#tag").val(value);
+            $("#tag").val(tagContent);
         }
     }
 }
