@@ -6,6 +6,7 @@ import life.majian.community.model.User;
 import life.majian.community.provider.GithubProvider;
 import life.majian.community.dto.GithubUser;
 import life.majian.community.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class AutorizeController {
     @Autowired
     private GithubProvider githubProvider;
@@ -62,8 +64,10 @@ public class AutorizeController {
 
             response.addCookie(new Cookie("token",token));
             return "redirect:/";
+        }else {
+            log.error("callback get github error ,{}"+githubUser);
+            return "redirect:/";
         }
-        return "redirect:/";
     }
 
     @GetMapping("/logout")
