@@ -13,7 +13,6 @@
     <script src="/js/editormd.min.js" type="application/javascript"></script>
 
 
-
 </head>
 <body>
 <div th:insert="~{navigation::nav}"></div>
@@ -62,19 +61,23 @@
                     <div id="select-tag" class="publish-tag-tab">
 
 
-
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation"  th:each="selectCategoryName,selectCategoryNameStat:${tags}" th:class="${selectCategoryNameStat.first?'active':''}">
-                                <a aria-controls="home" role="tab" data-toggle="tab" th:text="${selectCategoryName.categoryName}" th:href="${'#'+selectCategoryName.categoryName}"></a>
+                            <li role="presentation" th:each="selectCategoryName,selectCategoryNameStat:${tags}"
+                                th:class="${selectCategoryNameStat.first?'active':''}">
+                                <a aria-controls="home" role="tab" data-toggle="tab"
+                                   th:text="${selectCategoryName.categoryName}"
+                                   th:href="${'#'+selectCategoryName.categoryName}"></a>
                             </li>
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div th:each="selectCategoryName,selectCategoryNameStat:${tags}" th:id="${selectCategoryName.categoryName}" role="tabpanel"
+                            <div th:each="selectCategoryName,selectCategoryNameStat:${tags}"
+                                 th:id="${selectCategoryName.categoryName}" role="tabpanel"
                                  th:class="${selectCategoryNameStat.first?'tab-pane active':'tab-pane'}">
-                                     <span class="label label-info"   th:each="selectTag:${selectCategoryName.tags}" onclick="selectTag(this)" th:data-tag="${selectTag}"  >
+                                     <span class="label label-info" th:each="selectTag:${selectCategoryName.tags}"
+                                           onclick="selectTag(this)" th:data-tag="${selectTag}">
                                          <span class="glyphicon glyphicon-tags" th:text="${'  '+selectTag}"></span>
                                      </span>
 
@@ -84,20 +87,6 @@
 
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 <div class="container-fluid main">
